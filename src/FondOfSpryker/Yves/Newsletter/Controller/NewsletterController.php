@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class NewsletterController extends AbstractController
 {
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return array
      *
      * @throws

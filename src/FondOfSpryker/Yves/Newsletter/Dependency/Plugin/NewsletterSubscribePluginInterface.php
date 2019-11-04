@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 interface NewsletterSubscribePluginInterface
 {
     /**
-     * @param string $eamil
+     * @param string  $email
      * @param Request $request
      *
      * @return NewsletterResponseTransfer
      */
-    public function subscribe(string $eamil, Request $request): NewsletterResponseTransfer;
+    public function subscribe(string $email, Request $request): NewsletterResponseTransfer;
 }
