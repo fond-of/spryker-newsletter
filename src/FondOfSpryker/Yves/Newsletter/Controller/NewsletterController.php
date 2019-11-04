@@ -33,8 +33,7 @@ class NewsletterController extends AbstractController
         }
 
         $newsletterSubscriptionForm = $this->getFactory()
-            ->getNewsletterSubscriptionForm()
-            ->handleRequest($request);
+            ->getNewsletterSubscriptionForm();
 
         return [
             'newsletterSubscriptionForm' => $newsletterSubscriptionForm->createView(),
@@ -71,11 +70,15 @@ class NewsletterController extends AbstractController
      */
     public function confirmSubscriptionAction(Request $request): RedirectResponse
     {
-        $this->getClient()->confirmSubscription(
-            (new CrossEngageTransfer())->setExternalId($request->get('token'))
+        if (!$request->get('token')) {
+            return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
+        }
+
+        $response = $this->getFactory()->getNewsletterSubscriberPlugin()->confirmSubscription(
+            $request->get('token')
         );
 
-        return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
+        return $this->redirectResponseInternal($response->getRedirectTo());
     }
 
     /**

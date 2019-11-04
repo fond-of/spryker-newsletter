@@ -4,7 +4,6 @@ namespace FondOfSpryker\Shared\Newsletter;
 
 interface NewsletterConstants
 {
-
     public const ROUTE_NEWSLETTER_FOOTER = 'ROUTE_NEWSLETTER_FOOTER';
     public const ROUTE_NEWSLETTER_SUBMIT_FORM = 'ROUTE_NEWSLETTER_SUBMIT_FORM';
     public const ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION = 'ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION';

@@ -4,7 +4,6 @@ namespace FondOfSpryker\Yves\Newsletter\Dependency\Plugin;
 
 use Generated\Shared\Transfer\NewsletterResponseTransfer;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 interface NewsletterSubscribePluginInterface
 {
@@ -15,4 +14,11 @@ interface NewsletterSubscribePluginInterface
      * @return NewsletterResponseTransfer
      */
     public function subscribe(string $email, Request $request): NewsletterResponseTransfer;
+
+    /**
+     * @param string $externalId
+     *
+     * @return NewsletterResponseTransfer
+     */
+    public function confirmSubscription(string $externalId): NewsletterResponseTransfer;
 }
