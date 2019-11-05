@@ -88,10 +88,14 @@ class NewsletterController extends AbstractController
      */
     public function unsubscribeAction(Request $request): RedirectResponse
     {
-        $this->getClient()->unsubscribe(
-            (new CrossEngageTransfer())->setExternalId($request->get('token'))
+        if (!$request->get('token')) {
+            return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
+        }
+
+        $response = $this->getFactory()->getNewsletterSubscriberPlugin()->unsubscribe(
+            $request->get('token')
         );
 
-        return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
+        return $this->redirectResponseInternal($response->getRedirectTo());
     }
 }

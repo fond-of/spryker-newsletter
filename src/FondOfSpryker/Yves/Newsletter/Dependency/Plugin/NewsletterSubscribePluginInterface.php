@@ -21,4 +21,11 @@ interface NewsletterSubscribePluginInterface
      * @return NewsletterResponseTransfer
      */
     public function confirmSubscription(string $externalId): NewsletterResponseTransfer;
+
+    /**
+     * @param string $externalId
+     *
+     * @return NewsletterResponseTransfer
+     */
+    public function unsubscribe(string $externalId): NewsletterResponseTransfer;
 }
