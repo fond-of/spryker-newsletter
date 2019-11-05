@@ -24,11 +24,12 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
         $locale = $app->offsetGet('locale');
 
         $this
-            ->addFormRoute()                // form only
-            ->addFormSubmitRoute()          // submit logic
-            ->addSubscribeSuccessRoute($locale)    // redirect after submit (contentful)
-            ->addConfirmSubscription()      // confirm by token
-            ->addUnsubscribe();             // unsubscribe by token
+            ->addFormRoute()                        // form only
+            ->addFormSubmitRoute()                  // submit logic
+            ->addSubscribeSuccessRoute($locale)     // redirect after submit (contentful)
+            ->addAlreadySubscribed($locale)         // redirect if user already subscribed (contentful)
+            ->addConfirmSubscription()              // confirm by token
+            ->addUnsubscribe();                     // unsubscribe by token
     }
 
     /**
@@ -67,6 +68,40 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
         $subscribePathPart = $this->getConfig()->getSubscribePath($locale);
 
         $this->createController(sprintf('/{newsletter}/%s', $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_SUBSCRIBE_SUCCESS, 'Newsletter', 'Newsletter', 'subscribe')
+            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
+            ->value('newsletter', 'newsletter')
+            ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    protected function addAlreadySubscribed(string $locale): self
+    {
+        $subscribePathPart = $this->getConfig()->getAlreadySubscribed($locale);
+
+        $this->createController(sprintf('/{newsletter}/%s', $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED, 'Newsletter', 'Newsletter', 'subscribe')
+            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
+            ->value('newsletter', 'newsletter')
+            ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    protected function addFailure(string $locale): self
+    {
+        $subscribePathPart = $this->getConfig()->getFailure($locale);
+
+        $this->createController(sprintf('/{newsletter}/%s', $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_FAILURE, 'Newsletter', 'Newsletter', 'subscribe')
             ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
             ->value('newsletter', 'newsletter')
             ->method('GET');

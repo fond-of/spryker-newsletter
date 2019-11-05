@@ -38,6 +38,16 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getFailure(string $locale): string
+    {
+        return $this->getLocalized(NewsletterConstants::ROUTE_NEWSLETTER_FAILURE, $locale);
+    }
+
+    /**
      * @param string $key
      * @param string $locale
      * @param mixed  $default
