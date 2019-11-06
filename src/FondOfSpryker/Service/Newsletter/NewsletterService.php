@@ -17,7 +17,7 @@ class NewsletterService extends AbstractService implements NewsletterServiceInte
     {
         return $this->getFactory()->createNewsletterUrlBuilder()->buildOptInUrl($params);
     }
-    
+
     /**
      * @param  array  $params
      * @return string
@@ -25,5 +25,14 @@ class NewsletterService extends AbstractService implements NewsletterServiceInte
     public function getOptOutUrl(array $params): string
     {
         return $this->getFactory()->createNewsletterUrlBuilder()->buildOptOutUrl($params);
+    }
+
+    /**
+     * @param  string  $string
+     * @return string
+     */
+    public function getHash(string $string): string
+    {
+        return $this->getFactory()->createHashGenerator()->generate($string);
     }
 }

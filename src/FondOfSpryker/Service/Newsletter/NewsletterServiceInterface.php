@@ -15,4 +15,12 @@ interface NewsletterServiceInterface
      * @return string
      */
     public function getOptOutUrl(array $params): string;
+
+    /**
+     * @param  string  $string
+     * @return string
+     */
+    public function getHash(
+        string $string
+    ): string;
 }
