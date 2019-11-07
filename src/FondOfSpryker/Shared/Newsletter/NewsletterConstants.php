@@ -4,6 +4,9 @@ namespace FondOfSpryker\Shared\Newsletter;
 
 interface NewsletterConstants
 {
+    public const NEWSTLETTER = 'newsletter';
+    public const TOKEN = 'token';
+    
     public const ROUTE_NEWSLETTER_FOOTER = 'ROUTE_NEWSLETTER_FOOTER';
     public const ROUTE_NEWSLETTER_SUBMIT_FORM = 'ROUTE_NEWSLETTER_SUBMIT_FORM';
     public const ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION = 'ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION';
@@ -19,6 +22,7 @@ interface NewsletterConstants
     public const ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED = 'ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED';
     public const ROUTE_NEWSLETTER_FAILURE = 'ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED';
 
+    // HashAlgo Constants
     public const NEWSLETTER_HASH_ALGO = 'NEWSLETTER_HASH_ALGO';
     public const NEWSLETTER_MODIFY_IN = 'NEWSLETTER_MODIFY_IN';
     public const NEWSLETTER_MODIFY_OUT = 'NEWSLETTER_MODIFY_OUT';

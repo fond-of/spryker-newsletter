@@ -23,4 +23,14 @@ interface NewsletterServiceInterface
     public function getHash(
         string $string
     ): string;
+
+    /**
+     * @return string
+     */
+    public function getNewsletterParamName(): string;
+
+    /**
+     * @return string
+     */
+    public function getNewsletterTokenParamName(): string;
 }

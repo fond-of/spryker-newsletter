@@ -37,9 +37,10 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      */
     protected function addFormRoute(): self
     {
-        $this->createController('/{newsletter}/form', NewsletterConstants::ROUTE_NEWSLETTER_FOOTER, 'Newsletter', 'Newsletter', 'form')
-            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
-            ->value('newsletter', 'newsletter')
+        $name = $this->getName();
+        $this->createController(sprintf('/{%s}/form', $name), NewsletterConstants::ROUTE_NEWSLETTER_FOOTER, 'Newsletter', 'Newsletter', 'form')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
             ->method('GET|POST');
 
         return $this;
@@ -50,9 +51,10 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      */
     protected function addFormSubmitRoute(): self
     {
-        $this->createController('/{newsletter}/submit', NewsletterConstants::ROUTE_NEWSLETTER_SUBMIT_FORM, 'Newsletter', 'Newsletter', 'submit')
-            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
-            ->value('newsletter', 'newsletter')
+        $name = $this->getName();
+        $this->createController(sprintf('/{%s}/submit', $name), NewsletterConstants::ROUTE_NEWSLETTER_SUBMIT_FORM, 'Newsletter', 'Newsletter', 'submit')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
             ->method('GET|POST');
 
         return $this;
@@ -65,11 +67,12 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      */
     protected function addSubscribeSuccessRoute(string $locale): self
     {
+        $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getSubscribePath($locale);
 
-        $this->createController(sprintf('/{newsletter}/%s', $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_SUBSCRIBE_SUCCESS, 'Newsletter', 'Newsletter', 'subscribe')
-            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
-            ->value('newsletter', 'newsletter')
+        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_SUBSCRIBE_SUCCESS, 'Newsletter', 'Newsletter', 'subscribe')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
             ->method('GET');
 
         return $this;
@@ -82,11 +85,12 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      */
     protected function addAlreadySubscribed(string $locale): self
     {
+        $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getAlreadySubscribed($locale);
 
-        $this->createController(sprintf('/{newsletter}/%s', $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED, 'Newsletter', 'Newsletter', 'subscribe')
-            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
-            ->value('newsletter', 'newsletter')
+        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED, 'Newsletter', 'Newsletter', 'subscribe')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
             ->method('GET');
 
         return $this;
@@ -99,11 +103,12 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      */
     protected function addFailure(string $locale): self
     {
+        $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getFailure($locale);
 
-        $this->createController(sprintf('/{newsletter}/%s', $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_FAILURE, 'Newsletter', 'Newsletter', 'subscribe')
-            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
-            ->value('newsletter', 'newsletter')
+        $this->createController(sprintf('/{%s}/%s', $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_FAILURE, 'Newsletter', 'Newsletter', 'subscribe')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
             ->method('GET');
 
         return $this;
@@ -114,9 +119,11 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      */
     protected function addConfirmSubscription(): self
     {
-        $this->createController('/{newsletter}/confirm-subscription/{token}', NewsletterConstants::ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION, 'Newsletter', 'Newsletter', 'confirmSubscription')
-            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
-            ->value('newsletter', 'newsletter')
+        $name = $this->getName();
+        $tokenName = $this->getTokenName();
+        $this->createController(sprintf('/{%s}/confirm-subscription/{%s}', $name, $tokenName), NewsletterConstants::ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION, 'Newsletter', 'Newsletter', 'confirmSubscription')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
             ->method('GET');
 
         return $this;
@@ -127,11 +134,29 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      */
     protected function addUnsubscribe(): self
     {
-        $this->createController('/{newsletter}/unsubscribe/{token}', NewsletterConstants::ROUTE_NEWSLETTER_UNSUBSCRIBE, 'Newsletter', 'Newsletter', 'unsubscribe')
-            ->assert('newsletter', $this->getAllowedLocalesPattern() . 'newsletter|newsletter')
-            ->value('newsletter', 'newsletter')
+        $name = $this->getName();
+        $tokenName = $this->getTokenName();
+        $this->createController(sprintf('/{%s}/unsubscribe/{%s}', $name, $tokenName), NewsletterConstants::ROUTE_NEWSLETTER_UNSUBSCRIBE, 'Newsletter', 'Newsletter', 'unsubscribe')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
             ->method('GET');
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getName(): string
+    {
+        return NewsletterConstants::NEWSTLETTER;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTokenName(): string
+    {
+        return NewsletterConstants::TOKEN;
     }
 }

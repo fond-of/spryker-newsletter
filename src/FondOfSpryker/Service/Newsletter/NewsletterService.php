@@ -35,4 +35,20 @@ class NewsletterService extends AbstractService implements NewsletterServiceInte
     {
         return $this->getFactory()->createHashGenerator()->generate($string);
     }
+
+    /**
+     * @return string
+     */
+    public function getNewsletterParamName(): string
+    {
+        return $this->getFactory()->createNewsletterUrlBuilder()->getNameParam();
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewsletterTokenParamName(): string
+    {
+        return $this->getFactory()->createNewsletterUrlBuilder()->getTokenParam();
+    }
 }

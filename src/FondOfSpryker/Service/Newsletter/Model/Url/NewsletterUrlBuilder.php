@@ -7,7 +7,7 @@ use FondOfSpryker\Zed\Newsletter\NewsletterConfig;
 use Generated\Shared\Transfer\NewsletterTransfer;
 use Spryker\Shared\Kernel\Communication\Application;
 
-class NewsletterUrlBuilder
+class NewsletterUrlBuilder implements NewsletterUrlBuilderInterface
 {
     protected $application;
 
@@ -32,5 +32,21 @@ class NewsletterUrlBuilder
     public function buildOptOutUrl(array $params = []): string
     {
         return $this->application->url(NewsletterConstants::ROUTE_NEWSLETTER_UNSUBSCRIBE, $params);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameParam(): string
+    {
+        return NewsletterConstants::NEWSTLETTER;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTokenParam(): string
+    {
+        return NewsletterConstants::TOKEN;
     }
 }
