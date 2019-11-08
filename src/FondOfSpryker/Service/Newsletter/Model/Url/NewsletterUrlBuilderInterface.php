@@ -10,16 +10,16 @@ use Spryker\Shared\Kernel\Communication\Application;
 interface NewsletterUrlBuilderInterface
 {
     /**
-     * @param  array  $params
+     * @param  array $params
      * @return string
      */
-    public function buildOptInUrl(array $params = []): string;
+    public function buildOptInUrl(array $params): string;
 
     /**
-     * @param  array  $params
+     * @param  array $params
      * @return string
      */
-    public function buildOptOutUrl(array $params = []): string;
+    public function buildOptOutUrl(array $params): string;
 
     /**
      * @return string

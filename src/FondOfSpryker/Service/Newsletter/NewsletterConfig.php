@@ -7,10 +7,35 @@ use Spryker\Service\Kernel\AbstractBundleConfig;
 
 /**
  * Class NewsletterConfig
+ *
  * @package FondOfSpryker\Service\Newsletter
  */
 class NewsletterConfig extends AbstractBundleConfig
 {
+    /**
+     * @return string
+     */
+    public function getHostYves(): string
+    {
+        return $this->get(NewsletterConstants::BASE_URL_YVES);
+    }
+
+    /**
+     * @return string
+     */
+    public function getOptInPathPattern(): string
+    {
+        return $this->get(NewsletterConstants::OPT_IN_PATH_PATTERN, '%s/%s/%s/%s');
+    }
+
+    /**
+     * @return string
+     */
+    public function getOptoutPathPattern(): string
+    {
+        return $this->get(NewsletterConstants::OPT_OUT_PATH_PATTERN, '%s/%s/%s/%s');
+    }
+
     /**
      * @return string
      */

@@ -19,7 +19,8 @@ class HashGenerator implements HashGeneratorInterface
 
     /**
      * HashGenerator constructor.
-     * @param  \FondOfSpryker\Service\Newsletter\NewsletterConfig  $config
+     *
+     * @param \FondOfSpryker\Service\Newsletter\NewsletterConfig $config
      */
     public function __construct(NewsletterConfig $config)
     {
@@ -27,7 +28,7 @@ class HashGenerator implements HashGeneratorInterface
     }
 
     /**
-     * @param  string  $string
+     * @param  string $string
      * @return string
      * @throws \FondOfSpryker\Service\Newsletter\Exception\ModifierNotFoundException
      */
@@ -48,8 +49,8 @@ class HashGenerator implements HashGeneratorInterface
     }
 
     /**
-     * @param  string  $modifierType
-     * @param  string  $string
+     * @param  string $modifierType
+     * @param  string $string
      * @return string
      * @throws \FondOfSpryker\Service\Newsletter\Exception\ModifierNotFoundException
      */
@@ -60,15 +61,19 @@ class HashGenerator implements HashGeneratorInterface
     }
 
     /**
-     * @param  string  $modifier
+     * @param  string $modifier
      * @return string
      * @throws \FondOfSpryker\Service\Newsletter\Exception\ModifierNotFoundException
      */
     protected function getModifier(string $modifier): string
     {
         if (!array_key_exists($modifier, self::MODIFIER)) {
-            throw new ModifierNotFoundException(sprintf('Modifier %s not found in available modifier list (%s)',
-                $modifier, implode(', ', array_keys(self::MODIFIER))));
+            throw new ModifierNotFoundException(
+                sprintf(
+                    'Modifier %s not found in available modifier list (%s)',
+                    $modifier, implode(', ', array_keys(self::MODIFIER))
+                )
+            );
         }
 
         return self::MODIFIER[$modifier];

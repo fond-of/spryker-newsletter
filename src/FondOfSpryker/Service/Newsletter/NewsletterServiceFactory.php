@@ -15,9 +15,7 @@ class NewsletterServiceFactory extends AbstractServiceFactory
      */
     public function createNewsletterUrlBuilder(): NewsletterUrlBuilderInterface
     {
-        return new NewsletterUrlBuilder(
-            $this->getApplication()
-        );
+        return new NewsletterUrlBuilder($this->getConfig());
     }
 
     /**
@@ -26,13 +24,5 @@ class NewsletterServiceFactory extends AbstractServiceFactory
     public function createHashGenerator(): HashGeneratorInterface
     {
         return new HashGenerator($this->getConfig());
-    }
-
-    /**
-     * @return \Spryker\Shared\Kernel\Communication\Application
-     */
-    public function getApplication()
-    {
-        return $this->getProvidedDependency(NewsletterDependencyProvider::PLUGIN_APPLICATION);
     }
 }

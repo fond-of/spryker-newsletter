@@ -2,36 +2,48 @@
 
 namespace FondOfSpryker\Service\Newsletter\Model\Url;
 
+use FondOfSpryker\Service\Newsletter\NewsletterConfig;
 use FondOfSpryker\Shared\Newsletter\NewsletterConstants;
-use FondOfSpryker\Zed\Newsletter\NewsletterConfig;
 use Generated\Shared\Transfer\NewsletterTransfer;
-use Spryker\Shared\Kernel\Communication\Application;
+
 
 class NewsletterUrlBuilder implements NewsletterUrlBuilderInterface
 {
-    protected $application;
+    /**
+     * @var \FondOfSpryker\Service\Newsletter\Model\Url\NewsletterConfig
+     */
+    protected $config;
 
-    public function __construct(Application $application)
+    public function __construct(NewsletterConfig $config)
     {
-        $this->application = $application;
+        $this->config = $config;
     }
 
     /**
-     * @param  array  $params
+     * @param  array $params
      * @return string
      */
-    public function buildOptInUrl(array $params = []): string
+    public function buildOptInUrl(array $params): string
     {
-        return $this->application->url(NewsletterConstants::ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION, $params);
+        return $this->buildUrl($params, $this->config->getOptInPathPattern());
     }
 
     /**
-     * @param  array  $params
+     * @param  array $params
      * @return string
      */
-    public function buildOptOutUrl(array $params = []): string
+    public function buildOptOutUrl(array $params): string
     {
-        return $this->application->url(NewsletterConstants::ROUTE_NEWSLETTER_UNSUBSCRIBE, $params);
+        return $this->buildUrl($params, $this->config->getOptoutPathPattern());
+    }
+
+    /**
+     * @param  array $params
+     * @return string
+     */
+    protected function buildUrl(array $params, string $pattern): string
+    {
+        return $this->config->getHostYves() . '/' . vsprintf($pattern, $params);
     }
 
     /**
