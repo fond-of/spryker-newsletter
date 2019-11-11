@@ -25,7 +25,7 @@ class NewsletterConfig extends AbstractBundleConfig
      */
     public function getOptInPathPattern(): string
     {
-        return $this->get(NewsletterConstants::OPT_IN_PATH_PATTERN, '%s/%s/%s/%s');
+        return $this->get(NewsletterConstants::OPT_IN_PATH_PATTERN, '%s/%s/confirm-subscription/%s');
     }
 
     /**
@@ -33,7 +33,7 @@ class NewsletterConfig extends AbstractBundleConfig
      */
     public function getOptoutPathPattern(): string
     {
-        return $this->get(NewsletterConstants::OPT_OUT_PATH_PATTERN, '%s/%s/%s/%s');
+        return $this->get(NewsletterConstants::OPT_OUT_PATH_PATTERN, '%s/%s/unsubscribe/%s');
     }
 
     /**
