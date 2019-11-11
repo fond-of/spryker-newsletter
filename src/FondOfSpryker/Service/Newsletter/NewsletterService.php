@@ -10,7 +10,7 @@ use Spryker\Service\Kernel\AbstractService;
 class NewsletterService extends AbstractService implements NewsletterServiceInterface
 {
     /**
-     * @param  array  $params
+     * @param  array $params
      * @return string
      */
     public function getOptInUrl(array $params): string
@@ -19,7 +19,7 @@ class NewsletterService extends AbstractService implements NewsletterServiceInte
     }
 
     /**
-     * @param  array  $params
+     * @param  array $params
      * @return string
      */
     public function getOptOutUrl(array $params): string
@@ -28,7 +28,7 @@ class NewsletterService extends AbstractService implements NewsletterServiceInte
     }
 
     /**
-     * @param  string  $string
+     * @param  string $string
      * @return string
      */
     public function getHash(string $string): string

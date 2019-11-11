@@ -7,7 +7,7 @@ use FondOfSpryker\Service\Newsletter\Exception\ModifierNotFoundException;
 interface HashGeneratorInterface
 {
     /**
-     * @param  string  $string
+     * @param  string $string
      * @return string
      */
     public function generate(
