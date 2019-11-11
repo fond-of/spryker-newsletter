@@ -8,7 +8,7 @@ use Spryker\Yves\Kernel\BundleConfigResolverAwareTrait;
 use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
 /**
- * @method \FondOfSpryker\Yves\CrossEngage\NewsletterConfig getConfig()
+ * @method \FondOfSpryker\Yves\Newsletter\NewsletterConfig getConfig()
  */
 class NewsletterControllerProvider extends AbstractYvesControllerProvider
 {
@@ -24,13 +24,15 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
         $locale = $app->offsetGet('locale');
 
         $this
-            ->addFormRoute()                        // form only
-            ->addFormSubmitRoute()                  // submit logic 
-            ->addSubscribeSuccessRoute($locale)     // redirect after submit (contentful)
-            ->addAlreadySubscribed($locale)         // redirect if user already subscribed (contentful)
-            ->addConfirmSubscription()              // confirm by token
-            ->addUnsubscribe()                      // unsubscribe by token
-            ->addFailure($locale);                  // any other error cases
+            ->addFormRoute()                                // form only
+            ->addFormSubmitRoute()                          // submit logic
+            ->addConfirmSubscription()                      // confirm by token
+            ->addUnsubscribe()                              // unsubscribe by token
+            ->addRedirectSubscribeRoute($locale)            // contentful-redirect after subscribe (addFormSubmitRoute)
+            ->addRedirectAlreadySubscribed($locale)         // contentful-redirect if user already subscribed (addConfirmSubscription)
+            ->addRedirectSubscriptionConfirmedRoute($locale)// contentful-redirect after subscription confirmend (addConfirmSubscription)
+            ->addRedirectUnsubscribeRoute($locale)          // redirect after unsubscribe (contentful)
+            ->addRedirectFailure($locale);                  // redirect any other error cases (contentful)
     }
 
     /**
@@ -64,60 +66,6 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
     }
 
     /**
-     * @param string $locale
-     *
-     * @return $this
-     */
-    protected function addSubscribeSuccessRoute(string $locale): self
-    {
-        $name = $this->getName();
-        $subscribePathPart = $this->getConfig()->getSubscribePath($locale);
-
-        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_SUBSCRIBE_SUCCESS, 'Newsletter', 'Newsletter', 'subscribe')
-            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
-            ->value($name, $name)
-            ->method('GET');
-
-        return $this;
-    }
-
-    /**
-     * @param string $locale
-     *
-     * @return $this
-     */
-    protected function addAlreadySubscribed(string $locale): self
-    {
-        $name = $this->getName();
-        $subscribePathPart = $this->getConfig()->getAlreadySubscribed($locale);
-
-        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED, 'Newsletter', 'Newsletter', 'subscribe')
-            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
-            ->value($name, $name)
-            ->method('GET');
-
-        return $this;
-    }
-
-    /**
-     * @param string $locale
-     *
-     * @return $this
-     */
-    protected function addFailure(string $locale): self
-    {
-        $name = $this->getName();
-        $subscribePathPart = $this->getConfig()->getFailure($locale);
-
-        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_NEWSLETTER_FAILURE, 'Newsletter', 'Newsletter', 'subscribe')
-            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
-            ->value($name, $name)
-            ->method('GET');
-
-        return $this;
-    }
-
-    /**
      * @return $this
      */
     protected function addConfirmSubscription(): self
@@ -142,6 +90,96 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
         $tokenName = $this->getTokenName();
 
         $this->createController(sprintf('/{%s}/unsubscribe/{%s}', $name, $tokenName), NewsletterConstants::ROUTE_NEWSLETTER_UNSUBSCRIBE, 'Newsletter', 'Newsletter', 'unsubscribe')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
+            ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    protected function addRedirectSubscribeRoute(string $locale): self
+    {
+        $name = $this->getName();
+        $subscribePathPart = $this->getConfig()->getRedirectSubscribePath($locale);
+
+        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_SUBSCRIBE, 'Newsletter', 'Newsletter', '')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
+            ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    protected function addRedirectSubscriptionConfirmedRoute(string $locale): self
+    {
+        $name = $this->getName();
+        $subscribePathPart = $this->getConfig()->getRedirectSubscribtionConfirmedPath($locale);
+
+        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_SUBSCRIPTION_CONFIRMED, 'Newsletter', 'Newsletter', '')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
+            ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    protected function addRedirectAlreadySubscribed(string $locale): self
+    {
+        $name = $this->getName();
+        $subscribePathPart = $this->getConfig()->getRedirectAlreadySubscribedPath($locale);
+
+        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_ALREADY_SUBSCRIBED, 'Newsletter', 'Newsletter', '')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
+            ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    protected function addRedirectUnsubscribeRoute(string $locale): self
+    {
+        $name = $this->getName();
+        $subscribePathPart = $this->getConfig()->getRedirectUnsubscribePath($locale);
+
+        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_UNSUBSCRIBED, 'Newsletter', 'Newsletter', '')
+            ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
+            ->value($name, $name)
+            ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    protected function addRedirectFailure(string $locale): self
+    {
+        $name = $this->getName();
+        $subscribePathPart = $this->getConfig()->getRedirectFailurePath($locale);
+
+        $this->createController(sprintf('/{%s}/%s', $name, $subscribePathPart), NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_FAILURE, 'Newsletter', 'Newsletter', '')
             ->assert($name, $this->getAllowedLocalesPattern() . sprintf('%s|%s', $name, $name))
             ->value($name, $name)
             ->method('GET');

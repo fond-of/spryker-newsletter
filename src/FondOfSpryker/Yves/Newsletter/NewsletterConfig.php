@@ -12,9 +12,9 @@ class NewsletterConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getSubscribePath(string $locale): string
+    public function getRedirectSubscribePath(string $locale): string
     {
-        return $this->getLocalized(NewsletterConstants::ROUTE_NEWSLETTER_SUBSCRIBE_SUCCESS, $locale);
+        return $this->getLocalized(NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_SUBSCRIBE, $locale);
     }
 
     /**
@@ -22,9 +22,9 @@ class NewsletterConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getConfirmationPath(string $locale): string
+    public function getRedirectSubscribtionConfirmedPath(string $locale): string
     {
-        return $this->getLocalized(NewsletterConstants::NEWSLETTER_CONFIRMATION_PATH, $locale);
+        return $this->getLocalized(NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_SUBSCRIPTION_CONFIRMED, $locale);
     }
 
     /**
@@ -32,9 +32,9 @@ class NewsletterConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getAlreadySubscribed(string $locale): string
+    public function getRedirectAlreadySubscribedPath(string $locale): string
     {
-        return $this->getLocalized(NewsletterConstants::ROUTE_NEWSLETTER_ALREADY_SUBSCRIBED, $locale);
+        return $this->getLocalized(NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_ALREADY_SUBSCRIBED, $locale);
     }
 
     /**
@@ -42,9 +42,19 @@ class NewsletterConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getFailure(string $locale): string
+    public function getRedirectFailurePath(string $locale): string
     {
-        return $this->getLocalized(NewsletterConstants::ROUTE_NEWSLETTER_FAILURE, $locale);
+        return $this->getLocalized(NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_FAILURE, $locale);
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getRedirectUnsubscribePath(string $locale): string
+    {
+        return $this->getLocalized(NewsletterConstants::ROUTE_REDIRECT_NEWSLETTER_UNSUBSCRIBED, $locale);
     }
 
     /**
