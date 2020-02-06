@@ -34,4 +34,6 @@ interface NewsletterConstants
     public const NEWSLETTER_MODIFIER_IN = 'NEWSLETTER_MODIFIER_IN';
     public const NEWSLETTER_MODIFIER_OUT = 'NEWSLETTER_MODIFIER_OUT';
 
+    // SprykerUpgradeToDo Check if needed
+    public const EDITORIAL_NEWSLETTER = 'EDITORIAL_NEWSLETTER';
 }
