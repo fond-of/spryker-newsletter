@@ -1,0 +1,37 @@
+{% extends template('widget') %}
+
+{% define data = {
+    newsletterFooterForm: _widget.newsletterFooterForm
+} %}
+
+{% block body %}
+    <div class="newsletter-widget">
+        <div class="newsletter-widget__wrapper">
+            <p class="newsletter-widget__headline">{{ 'affenzahn.newsletter.label' | trans }}</p>
+
+            {{ form_start(data.newsletterFooterForm, { 'action': path('ROUTE_NEWSLETTER_SUBMIT_FORM', {'newsletter': 'newsletter'}), 'attr': {'id': 'newsletter-validate-detail', 'class': 'newsletter-widget__form'}}) }}
+            <div class="newsletter-widget__input-group">
+                <div class="newsletter-widget__input-wrapper">
+                    {{ form_row(data.newsletterFooterForm.email, {
+                        'attr': {
+                            'placeholder': 'newsletter.input.placeholder' | trans,
+                            'id': 'newsletter',
+                            'class': 'form-control form__input input-text required-entry validate-email',
+                            'required': ''
+                        }
+                    })
+                    }}
+                </div>
+
+                <div class="newsletter-widget__button-wrapper">
+                    {{ form_row(data.newsletterFooterForm.submit, {'label': 'newsletter.sign_up' | trans, 'attr': {'class': 'activeCampaignSubscriptionForm_button newsletter-widget__button'}}) }}
+                </div>
+            </div>
+            {{ form_end(data.newsletterFooterForm) }}
+        </div>
+
+        <p class="newsletter-widget__note newsletter-widget__note--top">{{ 'affenzahn.newsletter.note.top' | trans| raw }}<a href="#" class="newsletter-widget__note-show-more">{{ 'global.more' | trans }}</a></p>
+        <p class="newsletter-widget__note newsletter-widget__note--bottom">{{ 'affenzahn.newsletter.note.bottom' | trans | raw }}</p>
+
+    </div>
+{% endblock %}

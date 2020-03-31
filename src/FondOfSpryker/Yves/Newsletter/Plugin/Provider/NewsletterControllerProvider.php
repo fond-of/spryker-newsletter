@@ -8,6 +8,7 @@ use Spryker\Yves\Kernel\BundleConfigResolverAwareTrait;
 use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
 /**
+ * @deprecated use FondOfSpryker\Yves\Newsletter\Plugin\Router\NewsletterControllerProviderPlugin instead
  * @method \FondOfSpryker\Yves\Newsletter\NewsletterConfig getConfig()
  */
 class NewsletterControllerProvider extends AbstractYvesControllerProvider

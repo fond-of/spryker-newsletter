@@ -9,3 +9,41 @@
 ```
 composer require fond-of-spryker/newsletter
 ```
+
+## Configuration
+
+Register NewsletterControllerProviderPlugin in RouterDependencyProvider
+
+```
+    protected function getRouteProvider(): array
+    {
+        return [
+            ...
+            new NewsletterControllerProviderPlugin(),
+        ];
+    }
+```
+
+Register NewsletterFooterFormWidget in ShopApplicationDependencyProvider
+
+```
+    protected function getGlobalWidgets(): array
+    {
+        return [
+            ...
+            NewsletterFooterFormWidget::class,
+        ];
+    }
+```
+
+## Usage
+Use in templates
+```
+{% widget 'NewsletterFooterFormWidget' only %}{% endwidget %}
+```
+instead of the {{ render(path('XXX')) }}
+
+## Changelog
+2020-03-31
+ * added support for new routing in spryker
+ * added widget for the form

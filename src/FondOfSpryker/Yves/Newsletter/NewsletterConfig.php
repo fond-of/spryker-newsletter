@@ -8,7 +8,7 @@ use Spryker\Yves\Kernel\AbstractBundleConfig;
 class NewsletterConfig extends AbstractBundleConfig
 {
     /**
-     * @param string $locale
+     * @param  string  $locale
      *
      * @return string
      */
@@ -18,7 +18,7 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param string $locale
+     * @param  string  $locale
      *
      * @return string
      */
@@ -28,7 +28,7 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param string $locale
+     * @param  string  $locale
      *
      * @return string
      */
@@ -38,7 +38,7 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param string $locale
+     * @param  string  $locale
      *
      * @return string
      */
@@ -48,7 +48,7 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param string $locale
+     * @param  string  $locale
      *
      * @return string
      */
@@ -58,9 +58,9 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param string $key
-     * @param string $locale
-     * @param mixed  $default
+     * @param  string  $key
+     * @param  string  $locale
+     * @param  mixed  $default
      *
      * @return mixed
      */

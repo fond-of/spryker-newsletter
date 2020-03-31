@@ -2,11 +2,6 @@
 
 namespace FondOfSpryker\Yves\Newsletter\Controller;
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
-use FondOfSpryker\Shared\Newsletter\NewsletterConstants;
-use FondOfSpryker\Yves\CrossEngage\Plugin\Provider\NewsletterControllerProvider;
-use Generated\Shared\Transfer\CrossEngageTransfer;
-use Spryker\Shared\Url\UrlBuilder;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerShop\Yves\HomePage\Plugin\Provider\HomePageControllerProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -56,7 +51,6 @@ class NewsletterController extends AbstractController
                 $newsletterSubscriptionForm->get('email')->getData(),
                 $request
             );
-
             return $this->redirectResponseInternal($response->getRedirectTo());
         }
 
