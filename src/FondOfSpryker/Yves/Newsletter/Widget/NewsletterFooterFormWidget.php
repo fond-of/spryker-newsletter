@@ -27,6 +27,6 @@ class NewsletterFooterFormWidget extends AbstractWidget
      */
     public static function getTemplate(): string
     {
-        return '@Newsletter/view/newsletter/footer-form-widget.twig';
+        return '@Newsletter/views/newsletter/footer-form-widget.twig';
     }
 }
