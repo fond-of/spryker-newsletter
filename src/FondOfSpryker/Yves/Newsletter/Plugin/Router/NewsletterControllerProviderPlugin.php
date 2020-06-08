@@ -75,7 +75,7 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
         $name = $this->getName();
         $tokenName = $this->getTokenName();
 
-        $route = $this->buildRoute(sprintf('%s/confirm-subscription/%s', $name, $tokenName), 'Newsletter', 'Newsletter', 'confirmSubscription');
+        $route = $this->buildRoute(sprintf('%s/confirm-subscription/{%s}', $name, $tokenName), 'Newsletter', 'Newsletter', 'confirmSubscription');
         $route = $route->setMethods(['GET']);
         $routeCollection->add(NewsletterConstants::ROUTE_NEWSLETTER_CONFIRM_SUBSCRIPTION, $route);
 
@@ -92,7 +92,7 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
         $name = $this->getName();
         $tokenName = $this->getTokenName();
 
-        $route = $this->buildRoute(sprintf('%s/unsubscribe/%s', $name, $tokenName), 'Newsletter', 'Newsletter', 'unsubscribe');
+        $route = $this->buildRoute(sprintf('%s/unsubscribe/{%s}', $name, $tokenName), 'Newsletter', 'Newsletter', 'unsubscribe');
         $route = $route->setMethods(['GET']);
         $routeCollection->add(NewsletterConstants::ROUTE_NEWSLETTER_UNSUBSCRIBE, $route);
 
