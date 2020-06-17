@@ -4,6 +4,6 @@ namespace FondOfSpryker\Service\Newsletter\Exception;
 
 use Exception;
 
-class ModifierNotFoundException extends Exception
+class FormValidatorValidationErrorException extends Exception
 {
 }

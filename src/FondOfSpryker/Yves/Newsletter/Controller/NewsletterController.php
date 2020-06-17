@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Yves\Newsletter\Controller;
 
+use Generated\Shared\Transfer\NewsletterResponseTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerShop\Yves\HomePage\Plugin\Provider\HomePageControllerProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,10 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 class NewsletterController extends AbstractController
 {
     /**
-     * @param  Request $request
-     * @return array
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @throws
+     * @return array
      */
     public function formAction(Request $request): array
     {
@@ -39,28 +39,27 @@ class NewsletterController extends AbstractController
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @throws
      */
     public function submitAction(Request $request): RedirectResponse
     {
         $newsletterSubscriptionForm = $this->getFactory()->getNewsletterSubscriptionForm()->handleRequest($request);
 
-        if ($newsletterSubscriptionForm->isSubmitted() && $newsletterSubscriptionForm->isValid()) {
+        if ($newsletterSubscriptionForm->isSubmitted() && $newsletterSubscriptionForm->isValid() && $this->getFactory()->getNewsletterService()->validateForm($newsletterSubscriptionForm)) {
             $response = $this->getFactory()->getNewsletterSubscriberPlugin()->subscribe(
                 $newsletterSubscriptionForm->get('email')->getData(),
                 $request
             );
-            return $this->redirectResponseInternal($response->getRedirectTo());
+
+            return $this->createNewsletterRedirect($response);
         }
 
         return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function confirmSubscriptionAction(Request $request): RedirectResponse
     {
@@ -72,13 +71,13 @@ class NewsletterController extends AbstractController
             $request->get('token')
         );
 
-        return $this->redirectResponseInternal($response->getRedirectTo());
+        return $this->createNewsletterRedirect($response);
     }
 
     /**
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function unsubscribeAction(Request $request): RedirectResponse
     {
@@ -90,6 +89,27 @@ class NewsletterController extends AbstractController
             $request->get('token')
         );
 
-        return $this->redirectResponseInternal($response->getRedirectTo());
+        return $this->createNewsletterRedirect($response);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\NewsletterResponseTransfer $response
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    protected function createNewsletterRedirect(NewsletterResponseTransfer $response): RedirectResponse
+    {
+        $redirect = $this->getFactory()->getConfig()->getRedirectPathByKeyAndLocale(
+            $response->getRedirectTo(),
+            $this->getFactory()->getCurrentLocale()
+        );
+        $newsletterService = $this->getFactory()->getNewsletterService();
+        $params = [
+            'language' => $this->getFactory()->getCurrentLanguage(),
+            $newsletterService->getNewsletterParamName() => $newsletterService->getNewsletterParamName(),
+            $redirect => $redirect,
+        ];
+
+        return $this->redirectResponseExternal($newsletterService->getRedirectUrl($params));
     }
 }

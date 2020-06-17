@@ -9,10 +9,9 @@ use Spryker\Yves\Router\Route\RouteCollection;
 class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
 {
     /**
-     * @param  \Spryker\Yves\Router\Route\RouteCollection  $routeCollection
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
-     * @throws \Spryker\Shared\Kernel\Locale\LocaleNotFoundException
      */
     public function addRoutes(RouteCollection $routeCollection): RouteCollection
     {
@@ -22,9 +21,9 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
         $routeCollection = $this->addFormSubmitRoute($routeCollection);                            // submit logic
         $routeCollection = $this->addConfirmSubscription($routeCollection);                        // confirm by token
         $routeCollection = $this->addUnsubscribe($routeCollection);                                // unsubscribe by token
-        $routeCollection = $this->addRedirectSubscribeRoute($routeCollection, $locale);            // contentful-redirect after subscribe (addFormSubmitRoute)
-        $routeCollection = $this->addRedirectAlreadySubscribed($routeCollection, $locale);         // contentful-redirect if user already subscribed (addConfirmSubscription)
-        $routeCollection = $this->addRedirectSubscriptionConfirmedRoute($routeCollection, $locale);// contentful-redirect after subscription confirmend (addConfirmSubscription)
+        //$routeCollection = $this->addRedirectSubscribeRoute($routeCollection, $locale);            // contentful-redirect after subscribe (addFormSubmitRoute)
+        //$routeCollection = $this->addRedirectAlreadySubscribed($routeCollection, $locale);         // contentful-redirect if user already subscribed (addConfirmSubscription)
+        //$routeCollection = $this->addRedirectSubscriptionConfirmedRoute($routeCollection, $locale);// contentful-redirect after subscription confirmend (addConfirmSubscription)
         $routeCollection = $this->addRedirectUnsubscribeRoute($routeCollection, $locale);          // redirect after unsubscribe (contentful)
         $routeCollection = $this->addRedirectFailure($routeCollection, $locale);                   // redirect any other error cases (contentful)
 
@@ -32,11 +31,11 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
+     * @deprecated Register widget `FondOfSpryker\Yves\Newsletter\Widget\NewsletterFooterFormWidget` instead and use it in tpl. Dont use render in tpl!
+     *
      * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
-     *
-     * @deprecated Register widget `FondOfSpryker\Yves\Newsletter\Widget\NewsletterFooterFormWidget` instead and use it in tpl. Dont use render in tpl!
      */
     protected function addFormRoute(RouteCollection $routeCollection): RouteCollection
     {
@@ -100,8 +99,8 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @param  \Spryker\Yves\Router\Route\RouteCollection  $routeCollection
-     * @param  string  $locale
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     * @param string $locale
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
      */
@@ -118,8 +117,8 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @param  \Spryker\Yves\Router\Route\RouteCollection  $routeCollection
-     * @param  string  $locale
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     * @param string $locale
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
      */
@@ -136,8 +135,8 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @param  \Spryker\Yves\Router\Route\RouteCollection  $routeCollection
-     * @param  string  $locale
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     * @param string $locale
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
      */
@@ -154,8 +153,8 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @param  \Spryker\Yves\Router\Route\RouteCollection  $routeCollection
-     * @param  string  $locale
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     * @param string $locale
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
      */
@@ -172,8 +171,8 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
     }
 
     /**
-     * @param  \Spryker\Yves\Router\Route\RouteCollection  $routeCollection
-     * @param  string  $locale
+     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
+     * @param string $locale
      *
      * @return \Spryker\Yves\Router\Route\RouteCollection
      */
@@ -188,7 +187,6 @@ class NewsletterControllerProviderPlugin extends AbstractRouteProviderPlugin
 
         return $routeCollection;
     }
-
 
     /**
      * @return string

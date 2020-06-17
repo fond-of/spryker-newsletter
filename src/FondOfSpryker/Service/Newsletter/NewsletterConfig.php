@@ -39,6 +39,14 @@ class NewsletterConfig extends AbstractBundleConfig
     /**
      * @return string
      */
+    public function getNewsletterRedirectPattern(): string
+    {
+        return $this->get(NewsletterConstants::NEWSLETTER_REDIRECT_PATTERN, '%s/%s/%s');
+    }
+
+    /**
+     * @return string
+     */
     public function getHashAlgo(): string
     {
         return $this->get(NewsletterConstants::NEWSLETTER_HASH_ALGO, 'sha1');

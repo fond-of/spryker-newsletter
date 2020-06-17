@@ -9,7 +9,7 @@ class HashGenerator implements HashGeneratorInterface
 {
     public const MODIFIER = [
         'lower' => 'strtolower',
-        'upper' => 'strtoupper'
+        'upper' => 'strtoupper',
     ];
 
     /**
@@ -18,8 +18,6 @@ class HashGenerator implements HashGeneratorInterface
     protected $config;
 
     /**
-     * HashGenerator constructor.
-     *
      * @param \FondOfSpryker\Service\Newsletter\NewsletterConfig $config
      */
     public function __construct(NewsletterConfig $config)
@@ -28,13 +26,12 @@ class HashGenerator implements HashGeneratorInterface
     }
 
     /**
-     * @param  string $string
+     * @param string $string
+     *
      * @return string
-     * @throws \FondOfSpryker\Service\Newsletter\Exception\ModifierNotFoundException
      */
-    public function generate(
-        string $string
-    ): string {
+    public function generate(string $string): string
+    {
         if ($this->config->getModifyIn()) {
             $string = $this->modifyString($this->config->getModifierIn(), $string);
         }
@@ -49,21 +46,24 @@ class HashGenerator implements HashGeneratorInterface
     }
 
     /**
-     * @param  string $modifierType
-     * @param  string $string
+     * @param string $modifierType
+     * @param string $string
+     *
      * @return string
-     * @throws \FondOfSpryker\Service\Newsletter\Exception\ModifierNotFoundException
      */
     protected function modifyString(string $modifierType, string $string): string
     {
         $function = $this->getModifier($modifierType);
+
         return call_user_func($function, $string);
     }
 
     /**
-     * @param  string $modifier
-     * @return string
+     * @param string $modifier
+     *
      * @throws \FondOfSpryker\Service\Newsletter\Exception\ModifierNotFoundException
+     *
+     * @return string
      */
     protected function getModifier(string $modifier): string
     {
@@ -71,7 +71,8 @@ class HashGenerator implements HashGeneratorInterface
             throw new ModifierNotFoundException(
                 sprintf(
                     'Modifier %s not found in available modifier list (%s)',
-                    $modifier, implode(', ', array_keys(self::MODIFIER))
+                    $modifier,
+                    implode(', ', array_keys(self::MODIFIER))
                 )
             );
         }

@@ -39,7 +39,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
     /**
      * @return $this
      */
-    protected function addFormRoute(): self
+    protected function addFormRoute()
     {
         $name = $this->getName();
 
@@ -54,7 +54,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
     /**
      * @return $this
      */
-    protected function addFormSubmitRoute(): self
+    protected function addFormSubmitRoute()
     {
         $name = $this->getName();
 
@@ -69,7 +69,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
     /**
      * @return $this
      */
-    protected function addConfirmSubscription(): self
+    protected function addConfirmSubscription()
     {
         $name = $this->getName();
         $tokenName = $this->getTokenName();
@@ -85,7 +85,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
     /**
      * @return $this
      */
-    protected function addUnsubscribe(): self
+    protected function addUnsubscribe()
     {
         $name = $this->getName();
         $tokenName = $this->getTokenName();
@@ -103,7 +103,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      *
      * @return $this
      */
-    protected function addRedirectSubscribeRoute(string $locale): self
+    protected function addRedirectSubscribeRoute(string $locale)
     {
         $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getRedirectSubscribePath($locale);
@@ -121,7 +121,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      *
      * @return $this
      */
-    protected function addRedirectSubscriptionConfirmedRoute(string $locale): self
+    protected function addRedirectSubscriptionConfirmedRoute(string $locale)
     {
         $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getRedirectSubscribtionConfirmedPath($locale);
@@ -139,7 +139,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      *
      * @return $this
      */
-    protected function addRedirectAlreadySubscribed(string $locale): self
+    protected function addRedirectAlreadySubscribed(string $locale)
     {
         $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getRedirectAlreadySubscribedPath($locale);
@@ -157,7 +157,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      *
      * @return $this
      */
-    protected function addRedirectUnsubscribeRoute(string $locale): self
+    protected function addRedirectUnsubscribeRoute(string $locale)
     {
         $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getRedirectUnsubscribePath($locale);
@@ -175,7 +175,7 @@ class NewsletterControllerProvider extends AbstractYvesControllerProvider
      *
      * @return $this
      */
-    protected function addRedirectFailure(string $locale): self
+    protected function addRedirectFailure(string $locale)
     {
         $name = $this->getName();
         $subscribePathPart = $this->getConfig()->getRedirectFailurePath($locale);
