@@ -8,7 +8,7 @@ use Spryker\Yves\Kernel\AbstractBundleConfig;
 class NewsletterConfig extends AbstractBundleConfig
 {
     /**
-     * @param  string  $locale
+     * @param string $locale
      *
      * @return string
      */
@@ -18,7 +18,7 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param  string  $locale
+     * @param string $locale
      *
      * @return string
      */
@@ -28,7 +28,7 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param  string  $locale
+     * @param string $locale
      *
      * @return string
      */
@@ -38,7 +38,7 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param  string  $locale
+     * @param string $locale
      *
      * @return string
      */
@@ -48,7 +48,18 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param  string  $locale
+     * @param string $key
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getRedirectPathByKeyAndLocale(string $key, string $locale): string
+    {
+        return $this->getLocalized($key, $locale);
+    }
+
+    /**
+     * @param string $locale
      *
      * @return string
      */
@@ -58,9 +69,9 @@ class NewsletterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param  string  $key
-     * @param  string  $locale
-     * @param  mixed  $default
+     * @param string $key
+     * @param string $locale
+     * @param mixed $default
      *
      * @return mixed
      */
@@ -68,17 +79,17 @@ class NewsletterConfig extends AbstractBundleConfig
     {
         $localizedConfigs = $this->get(NewsletterConstants::NEWSLETTER_LOCALIZED_CONFIGS, []);
 
-        if (!\is_array($localizedConfigs) || empty($localizedConfigs)) {
+        if (!is_array($localizedConfigs) || empty($localizedConfigs)) {
             return $default;
         }
 
-        if (!\array_key_exists($locale, $localizedConfigs) || !\is_array($localizedConfigs[$locale])) {
+        if (!array_key_exists($locale, $localizedConfigs) || !is_array($localizedConfigs[$locale])) {
             return $default;
         }
 
         $configs = $localizedConfigs[$locale];
 
-        if (!\array_key_exists($key, $configs)) {
+        if (!array_key_exists($key, $configs)) {
             return $default;
         }
 

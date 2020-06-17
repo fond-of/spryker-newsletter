@@ -2,21 +2,18 @@
 
 namespace FondOfSpryker\Service\Newsletter\Model\Url;
 
-use FondOfSpryker\Shared\Newsletter\NewsletterConstants;
-use FondOfSpryker\Zed\Newsletter\NewsletterConfig;
-use Generated\Shared\Transfer\NewsletterTransfer;
-use Spryker\Shared\Kernel\Communication\Application;
-
 interface NewsletterUrlBuilderInterface
 {
     /**
-     * @param  array $params
+     * @param array $params
+     *
      * @return string
      */
     public function buildOptInUrl(array $params): string;
 
     /**
-     * @param  array $params
+     * @param array $params
+     *
      * @return string
      */
     public function buildOptOutUrl(array $params): string;
@@ -30,4 +27,12 @@ interface NewsletterUrlBuilderInterface
      * @return string
      */
     public function getTokenParam(): string;
+
+    /**
+     * @param array $params
+     * @param bool $external
+     *
+     * @return string
+     */
+    public function buildRedirectUrl(array $params, bool $external): string;
 }
