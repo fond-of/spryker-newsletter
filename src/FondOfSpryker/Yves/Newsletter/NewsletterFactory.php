@@ -55,14 +55,6 @@ class NewsletterFactory extends AbstractFactory
     }
 
     /**
-     * @return string
-     */
-    public function getCurrentLanguage(): string
-    {
-        return $this->getStore()->getCurrentLanguage();
-    }
-
-    /**
      * @return \FondOfSpryker\Yves\Newsletter\Dependency\Plugin\NewsletterSubscribePluginInterface|null
      */
     public function getNewsletterSubscriberPlugin(): ?NewsletterSubscribePluginInterface
