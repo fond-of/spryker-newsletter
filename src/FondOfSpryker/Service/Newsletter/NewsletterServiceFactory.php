@@ -52,6 +52,6 @@ class NewsletterServiceFactory extends AbstractServiceFactory
      */
     public function getStoreInstance(): Store
     {
-        return $this->getProvidedDependency(NewsletterDependencyProvider::INSTANNCE_STORE);
+        return $this->getProvidedDependency(NewsletterDependencyProvider::INSTANCE_STORE);
     }
 }
