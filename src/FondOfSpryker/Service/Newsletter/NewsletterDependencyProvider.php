@@ -10,7 +10,7 @@ use Spryker\Shared\Kernel\Store;
 class NewsletterDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const NEWSLETTER_FORM_VALIDATOR = 'NEWSLETTER_FORM_VALIDATOR';
-    public const INSTANNCE_STORE = 'INSTANNCE_STORE';
+    public const INSTANCE_STORE = 'INSTANCE_STORE';
 
     /**
      * @param \Spryker\Service\Kernel\Container $container
@@ -46,7 +46,7 @@ class NewsletterDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function addStoreInstance(Container $container): Container
     {
-        $container[static::INSTANNCE_STORE] = function () {
+        $container[static::INSTANCE_STORE] = function () {
             return Store::getInstance();
         };
 
