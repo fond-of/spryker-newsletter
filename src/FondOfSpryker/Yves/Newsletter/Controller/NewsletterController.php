@@ -105,7 +105,7 @@ class NewsletterController extends AbstractController
         );
         $newsletterService = $this->getFactory()->getNewsletterService();
         $params = [
-            'language' => $this->getFactory()->getCurrentLanguage(),
+            'language' => $this->getFactory()->getNewsletterService()->getLanguagePrefix(),
             $newsletterService->getNewsletterParamName() => $newsletterService->getNewsletterParamName(),
             $redirect => $redirect,
         ];

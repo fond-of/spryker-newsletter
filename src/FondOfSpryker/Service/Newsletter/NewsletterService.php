@@ -42,6 +42,14 @@ class NewsletterService extends AbstractService implements NewsletterServiceInte
     }
 
     /**
+     * @return string
+     */
+    public function getLanguagePrefix(): string
+    {
+        return $this->getFactory()->createLanguagePrefixResolver()->resolve();
+    }
+
+    /**
      * @param string $string
      *
      * @return string

@@ -29,6 +29,13 @@ interface NewsletterServiceInterface
     public function getRedirectUrl(array $params, bool $isExternal = false): string;
 
     /**
+     * @throws \Spryker\Shared\Kernel\Locale\LocaleNotFoundException
+     *
+     * @return string
+     */
+    public function getLanguagePrefix(): string;
+
+    /**
      * @param string $string
      *
      * @return string
