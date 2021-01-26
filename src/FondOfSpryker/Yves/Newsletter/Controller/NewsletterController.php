@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Yves\Newsletter\Controller;
 
+use FondOfSpryker\Shared\Newsletter\NewsletterConstants;
 use Generated\Shared\Transfer\NewsletterResponseTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
 use SprykerShop\Yves\HomePage\Plugin\Provider\HomePageControllerProvider;
@@ -50,7 +51,7 @@ class NewsletterController extends AbstractController
                 $request
             );
 
-            return $this->createNewsletterRedirect($response);
+            return $this->createNewsletterRedirect($response, $request->getQueryString());
         }
 
         return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
@@ -71,7 +72,7 @@ class NewsletterController extends AbstractController
             $request->get('token')
         );
 
-        return $this->createNewsletterRedirect($response);
+        return $this->createNewsletterRedirect($response, $request->getQueryString());
     }
 
     /**
@@ -89,15 +90,16 @@ class NewsletterController extends AbstractController
             $request->get('token')
         );
 
-        return $this->createNewsletterRedirect($response);
+        return $this->createNewsletterRedirect($response, $request->getQueryString());
     }
 
     /**
      * @param \Generated\Shared\Transfer\NewsletterResponseTransfer $response
+     * @param string|null $queryString
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function createNewsletterRedirect(NewsletterResponseTransfer $response): RedirectResponse
+    protected function createNewsletterRedirect(NewsletterResponseTransfer $response, ?string $queryString = null): RedirectResponse
     {
         $redirect = $this->getFactory()->getConfig()->getRedirectPathByKeyAndLocale(
             $response->getRedirectTo(),
@@ -108,6 +110,7 @@ class NewsletterController extends AbstractController
             'language' => $this->getFactory()->getNewsletterService()->getLanguagePrefix(),
             $newsletterService->getNewsletterParamName() => $newsletterService->getNewsletterParamName(),
             $redirect => $redirect,
+            NewsletterConstants::QUERY_STRING => $queryString,
         ];
 
         return $this->redirectResponseExternal($newsletterService->getRedirectUrl($params));

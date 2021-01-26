@@ -6,7 +6,12 @@ use Symfony\Component\Form\FormInterface;
 
 interface FormValidatorCollectionInterface
 {
-    public function addValidator(FormValidatorInterface $formValidator);
+    /**
+     * @param \FondOfSpryker\Service\Newsletter\Model\Validator\FormValidatorInterface $formValidator
+     *
+     * @return $this|\FondOfSpryker\Service\Newsletter\Model\Validator\FormValidatorCollectionInterface
+     */
+    public function addValidator(FormValidatorInterface $formValidator): self;
 
     /**
      * @param string $validatorName
