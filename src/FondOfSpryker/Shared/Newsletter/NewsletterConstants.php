@@ -6,6 +6,7 @@ interface NewsletterConstants
 {
     public const NEWSTLETTER = 'newsletter';
     public const TOKEN = 'token';
+    public const QUERY_STRING = 'query-string';
     public const BASE_URL_YVES = 'BASE_URL_YVES';
     public const OPT_IN_PATH_PATTERN = 'OPT_IN_PATH_PATTERN';
     public const OPT_OUT_PATH_PATTERN = 'OPT_OUT_PATH_PATTERN';
