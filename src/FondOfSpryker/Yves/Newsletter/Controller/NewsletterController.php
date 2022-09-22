@@ -5,7 +5,7 @@ namespace FondOfSpryker\Yves\Newsletter\Controller;
 use FondOfSpryker\Shared\Newsletter\NewsletterConstants;
 use Generated\Shared\Transfer\NewsletterResponseTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
-use SprykerShop\Yves\HomePage\Plugin\Provider\HomePageControllerProvider;
+use SprykerShop\Yves\HomePage\Plugin\Router\HomePageRouteProviderPlugin;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -54,7 +54,7 @@ class NewsletterController extends AbstractController
             return $this->createNewsletterRedirect($response, $request->getQueryString());
         }
 
-        return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
+        return $this->redirectResponseInternal(HomePageRouteProviderPlugin::ROUTE_NAME_HOME);
     }
 
     /**
@@ -65,7 +65,7 @@ class NewsletterController extends AbstractController
     public function confirmSubscriptionAction(Request $request): RedirectResponse
     {
         if (!$request->get('token')) {
-            return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
+            return $this->redirectResponseInternal(HomePageRouteProviderPlugin::ROUTE_NAME_HOME);
         }
 
         $response = $this->getFactory()->getNewsletterSubscriberPlugin()->confirmSubscription(
@@ -83,7 +83,7 @@ class NewsletterController extends AbstractController
     public function unsubscribeAction(Request $request): RedirectResponse
     {
         if (!$request->get('token')) {
-            return $this->redirectResponseInternal(HomePageControllerProvider::ROUTE_HOME);
+            return $this->redirectResponseInternal(HomePageRouteProviderPlugin::ROUTE_NAME_HOME);
         }
 
         $response = $this->getFactory()->getNewsletterSubscriberPlugin()->unsubscribe(
