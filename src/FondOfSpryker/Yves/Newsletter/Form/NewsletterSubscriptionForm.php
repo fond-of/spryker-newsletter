@@ -17,7 +17,7 @@ class NewsletterSubscriptionForm extends AbstractType
 {
     public const FORM_ID = 'newsletter';
     public const FIELD_EMAIL = 'email';
-    public const FIELD_NAME = 'name';
+    public const FIELD_URL = 'url';
     public const FIELD_SUBMIT = 'submit';
 
     /**
@@ -52,7 +52,7 @@ class NewsletterSubscriptionForm extends AbstractType
                 ]
             )
             ->add(
-                self::FIELD_NAME,
+                self::FIELD_URL,
                 TextType::class,
                 [
                 'label' => false,
@@ -60,6 +60,7 @@ class NewsletterSubscriptionForm extends AbstractType
                 'attr' => [
                     'class' => 'input-group-field hp',
                     'placeholder' => 'newsletter.honeypot',
+                    'autocomplete' => 'off',
                 ],
                 ]
             )

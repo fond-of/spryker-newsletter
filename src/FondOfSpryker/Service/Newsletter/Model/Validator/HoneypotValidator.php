@@ -18,7 +18,7 @@ class HoneypotValidator implements FormValidatorInterface
      */
     public function validate(FormInterface $form): bool
     {
-        if ($form->get('name')->getData() !== null) {
+        if ($form->get('url')->getData() !== null) {
             throw new FormValidatorValidationErrorException(sprintf('%s failt to validate!', $this->getName()));
         }
 
